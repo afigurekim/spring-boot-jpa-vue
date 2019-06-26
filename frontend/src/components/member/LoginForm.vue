@@ -1,7 +1,7 @@
 <template>
 <div>
   <Nav></Nav>
-  <form @submit="submitbtn">
+  <form @submit="submitbtn" action="/memberlist">
     <div class="form-group">
       <label for="email">이메일:</label>
       <input type="email" v-model="email" class="form-control" id="email" placeholder="이메일 예: id@domain.com">
@@ -72,15 +72,12 @@ export default {
   },
   methods: {
     submitbtn:function(e) {
-        e.preventDefault()
-        alert('Submit 버튼 클릭')
-        if (this.noLogin) { 
-            alert('로그인 실패 : 로그인 정보를 확인해주세요')
-            return 
-        }
-        this.validchk = true
-        if (this.email === 'home@home.com' && this.password === '1234') {
-            alert('로그인 성공')
+        if (!this.noLogin && this.email === 'home@home.com' && this.password === '1234') {
+            this.validchk = true
+            alert(`${this.email}\n${this.password}\n로그인 성공`)
+        } else {
+            alert('로그인 실패')
+            e.preventDefault()
         }
     }
   }
