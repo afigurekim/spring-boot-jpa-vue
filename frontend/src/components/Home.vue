@@ -1,43 +1,19 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <table class="w3-table w3-bordered w3-striped w3-border test w3-hoverable">
-      <tbody>
-        <tr class="w3-green">
-            <th>No.</th>
-            <th>제목</th>
-            <th>예제</th>
-      </tr>
-      </tbody>
-      <tbody>
-      <tr>
-        <td>1</td>
-        <td>클릭이벤트</td>
-        <td><router-link to="/calculator">계산기</router-link></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>페이지이동</td>
-        <td><router-link to="/join">조인폼</router-link></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td></td>
-        <td><router-link to="/login">로그인</router-link></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td></td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
+    <Nav></Nav>
+    <JumboTron></JumboTron>
+    <Footer></Footer>
   </div>
 </template>
-
 <script>
+import Nav from '@/components/common/Nav.vue'
+import Footer from'@/components/common/Footer.vue'
+import JumboTron from'@/components/common/JumboTron.vue'
 export default {
-  name: 'Home',
+  name: 'home',
+  components:{
+    Nav,Footer,JumboTron
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
@@ -45,7 +21,6 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
@@ -53,6 +28,7 @@ h1, h2 {
 }
 ul {
   list-style-type: none;
+
   padding: 0;
 }
 li {
