@@ -1,7 +1,7 @@
 <template>
 <div>
   <Nav></Nav>
-  <form @submit="submitbtn" action="/memberlist">
+  <form>
     <div class="form-group">
       <label for="email">이메일:</label>
       <input type="email" v-model="email" class="form-control" id="email" placeholder="이메일 예: id@domain.com">
@@ -20,7 +20,10 @@
     <div class="checkbox">
       <label><input type="checkbox"> Remember me</label>
     </div>
-    <button type="submit" class="btn btn-default">로그인</button>
+    <button class="btn btn-default" @click="get">조 회</button>
+    <button class="btn btn-default" @click="post">입 력</button>
+    <button class="btn btn-default" @click="put">수 정</button>
+    <button class="btn btn-default" @click="del">삭 제</button>
   </form>
   <Footer></Footer>
 </div>
@@ -81,11 +84,47 @@ export default {
     //         e.preventDefault()
     //     }
     // }
-    submitbtn: function() {
-      alert('클릭')
-      axios.get('/customers/count')
-      .then(d => { alert(`SUCCESS : ${d.data}`) })
-      .catch(e => { alert('ERROR') })
+    // submitbtn: function() {
+    //   alert('클릭')
+    //   axios.get('/customers/count')
+    //   .then(d => { 
+    //     alert(`SUCCESS : ${d.data}`)
+    //   })
+    //   .catch(e => { 
+    //     alert('ERROR') 
+    //   })
+    //   this.$router.push("/memberlist")
+    // }
+    get: () => {
+      axios.get('/customers/hong')
+      .then(d => {
+        alert(`SUCCESS : ${d.data.customerId}`)
+      })
+      .catch(e => {
+        alert('ERROR')
+      })
+      this.$router.push("/loginform")
+    },
+    post: () => {
+      axios.post('/customers')
+      .then(d => {
+        alert(`POST 연동성공 : ${d.data.result}`)
+      })
+      this.$router.push("/loginform")
+    },
+    put: () => {
+      axios.put('/customers/id')
+      .then(d => {
+        alert(`PUT 연동성공 : ${d.data.result}`)
+      })
+      this.$router.push("/loginform")
+    },
+    del: () => {
+      axios.delete('/customers/id')
+      .then(d => {
+        alert(`DELETE 연동성공 : ${d.data.result}`)
+      })
+      this.$router.push("/loginform")
     }
   }
 }

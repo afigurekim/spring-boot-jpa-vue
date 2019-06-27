@@ -28,20 +28,21 @@ public class CustomerController {
 
     @Autowired CustomerService customerService;
     @Autowired CustomerDTO customer;
+    @Autowired Printer p;
 
     @PostMapping("")
     public HashMap<String,Object> join(@RequestBody CustomerDTO param) {
-        customerService.addCustomer(param);
         HashMap<String, Object> map = new HashMap<>();
+        p.accept("POST 진입");
         map.put("result", "SUCCESS");
         return map;
     }
 
-    // @GetMapping("/page/{pageNum}")
-    // public HashMap<String, Object> list(@PathVariable String pageNum) {
-    //     HashMap<String, Object> map = new HashMap<>();
-    //     return map;
-    // }
+    @GetMapping("/page/{pageNum}")
+    public HashMap<String, Object> list(@PathVariable String pageNum) {
+        HashMap<String, Object> map = new HashMap<>();
+        return map;
+    }
 
     @GetMapping("/count")
     public String count() {
@@ -59,26 +60,25 @@ public class CustomerController {
 
     @GetMapping("/{customerId}")
     public CustomerDTO getCustomer(@PathVariable String customerId) {
-        System.out.println("ID 검색 진입 : "+customerId);
-        return customerService.findCustomerById(customerId);
+        HashMap<String, Object> map = new HashMap<>();
+        p.accept("GET 진입 : "+customerId);
+        customer.setCustomerId("hong");
+        return customer;
     }
 
     @PutMapping("/{customerId}")
-    public CustomerDTO updateCustomer(@RequestBody CustomerDTO customer) {
-        int res = customerService.updateCustomer(customer);
-        if(res == 1){
-            customer = customerService.findCustomerById(customer.getCustomerId());
-        }else{
-            System.out.println("update 컨트롤러 실패");
-        }
-        return customer;
+    public HashMap<String, Object> updateCustomer(@PathVariable String customerId) {
+        HashMap<String, Object> map = new HashMap<>();
+        p.accept("PUT 진입 : "+customerId);
+        map.put("result", "SUCCESS");
+        return map;
     }
 
     @DeleteMapping("/{customerId}")
     public HashMap<String, Object> deleteCustomer(@PathVariable String customerId) {
-        customer.setCustomerId(customerId);
-        customerService.deleteCustomer(customer);
         HashMap<String, Object> map = new HashMap<>();
+        p.accept("DELETE 진입 : "+customerId);
+        customer.setCustomerId(customerId);
         map.put("result", "SUCCESS");
         return map;
     }
