@@ -3,7 +3,7 @@
    <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <div class="navbar-brand"><router-link to="/">Vue.js</router-link></div>
+      <div class="navbar-brand"><router-link to="/"><img alt="Home" src="../../assets/home.png"></router-link></div>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><router-link to="/">Home</router-link></li>
