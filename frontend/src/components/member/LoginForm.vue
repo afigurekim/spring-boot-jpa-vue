@@ -71,14 +71,20 @@ export default {
       noLogin() { return !this.valid || this.validchk }
   },
   methods: {
-    submitbtn:function(e) {
-        if (!this.noLogin && this.email === 'home@home.com' && this.password === '1234') {
-            this.validchk = true
-            alert(`${this.email}\n${this.password}\n로그인 성공`)
-        } else {
-            alert('로그인 실패')
-            e.preventDefault()
-        }
+    // submitbtn:function(e) {
+    //     if (!this.noLogin && this.email === 'home@home.com' && this.password === '1234') {
+    //         this.validchk = true
+    //         alert(`${this.email}\n${this.password}\n로그인 성공`)
+    //     } else {
+    //         alert('로그인 실패')
+    //         e.preventDefault()
+    //     }
+    // }
+    submitbtn: function() {
+      alert('클릭')
+      axios.get('/customers/count')
+      .then(d => { alert('SUCCESS'+d) })
+      .catch(e => { alert('ERROR') })
     }
   }
 }

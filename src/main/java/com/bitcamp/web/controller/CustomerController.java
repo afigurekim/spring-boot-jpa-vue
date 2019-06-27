@@ -29,9 +29,6 @@ public class CustomerController {
     @Autowired CustomerService customerService;
     @Autowired CustomerDTO customer;
 
-    @Autowired Printer p;
-    @Autowired PageProxy pxy;
-
     @PostMapping("")
     public HashMap<String,Object> join(@RequestBody CustomerDTO param) {
         customerService.addCustomer(param);
@@ -40,25 +37,17 @@ public class CustomerController {
         return map;
     }
 
-    @GetMapping("/page/{pageNum}")
-    public HashMap<String, Object> list(@PathVariable String pageNum) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("totalCount", customerService.countAll());
-        map.put("page_num", pageNum);
-        map.put("page_size", "5");
-        map.put("block_size", "5");
-        pxy.execute(map);
-        map.put("list", customerService.findCustomers(pxy));
-        map.put("pxy", pxy);
-        return map;
-    }
+    // @GetMapping("/page/{pageNum}")
+    // public HashMap<String, Object> list(@PathVariable String pageNum) {
+    //     HashMap<String, Object> map = new HashMap<>();
+    //     return map;
+    // }
 
     @GetMapping("/count")
     public String count() {
         System.out.println("CustomerController count() 경로로 들어옴");
         int count = customerService.countAll();
-        p.accept("람다가 출력한 고객의 총인원 : "+count);
-        return count+"";
+        return "100";
     }
 
     @GetMapping("/{customerId}/{password}")
